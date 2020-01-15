@@ -5,7 +5,7 @@ module.exports = {
   async index(request, response) {
     const devs = await Dev.find();
 
-    response.json(devs);
+    return response.json(devs);
   },
 
   async store(request, response) {
@@ -18,7 +18,7 @@ module.exports = {
 
       const { name = login, bio, avatar_url } = apiResponse.data
 
-      const techsArray = techs.split(',').map(tech => tech.trim());
+      const techsArray = parseStringAsArray(techs);
 
       const location = {
         type: 'Point',
