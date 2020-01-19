@@ -1,5 +1,6 @@
 const axios = require('axios');
 const Dev = require('../models/Dev');
+const parseStringAsArray = require('../utils/parseStringAsArray');
 
 module.exports = {
   async index(request, response) {
@@ -13,8 +14,8 @@ module.exports = {
 
     let dev = await Dev.findOne({ github_username });
 
-    if(!dev) {
-      const apiResponse =  await axios.get(`https://api.github.com/users/${github_username}`);
+    if (!dev) {
+      const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`);
 
       const { name = login, bio, avatar_url } = apiResponse.data
 
